@@ -9,7 +9,7 @@ export const _register = t.Object ({
     username: t.String(),
     password: t.String(),
     display_name: t.String(),
-    date_of_birthe: t.Optional(t.Date()),
+    date_of_birth: t.Optional(t.Date()),
     looking_for: t.Union([t.Literal('male'), t.Literal('female'), t.Literal('all')]),
 })
 

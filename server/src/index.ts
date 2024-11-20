@@ -6,14 +6,16 @@ import {cors} from "@elysiajs/cors";
 import { MongoDB } from "./configs/database.config";
 import jwt from "@elysiajs/jwt";
 import { jwtConfig } from "./configs/jwt.config";
+import { AccountComtroller } from "./controllers/account.controller";
 
 MongoDB.connect()
 
 const app = new Elysia()
 .use(cors())
-.use(example)
+// .use(example)
 .use(swaggerConfig)
 .use(jwtConfig)
+.use(AccountComtroller)
 
 .listen({
   port: Bun.env.PORT || 8000,
