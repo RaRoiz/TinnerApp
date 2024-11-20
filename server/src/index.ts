@@ -18,7 +18,7 @@ const app = new Elysia()
 .use(AccountComtroller)
 
 .listen({
-  port: Bun.env.PORT || 8000,
+  port: Bun.env.PORT || 6666,
   tls: tlsConfig
 })
 
