@@ -1,7 +1,8 @@
-import { t, Static } from "elysia"
+import Elysia, { t, Static } from "elysia"
 import { _register } from "./register.type"
 import { _pagination, CreatePagination } from "./pagination.type"
 import { User } from "../models/user.model"
+import { model } from "mongoose"
 
 
 export const _profile = t.Object({
@@ -39,9 +40,17 @@ const _userPagination = t.Object({
     looking_for: t.Optional(t.Union([t.Literal('male'),t.Literal('female'),t.Literal('all')]))
 })
 export const _updateProfile = t.Omit(_profile,['id','username','updated_at','created_at','last_active','age'])
-export const userPaginator = CreatePagination(_user,_userPagination)
+export const _userPaginator = CreatePagination(_user,_userPagination)
+
+export const UserDto = new Elysia().model({
+    pagination: t.Optional(_userPagination),
+    updateProfile: _updateProfile,
+    users:_userPaginator,
+    user: _user
+})
 
 
 export type updateProfile = Static <typeof _updateProfile >
-export type userPaginator = Static <typeof _userPagination >
+export type userPagination = Static <typeof _userPagination >
+export type userPaginator = Static <typeof _userPaginator >
 export type user = Static<typeof _user>
