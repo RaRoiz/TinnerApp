@@ -7,8 +7,11 @@ import { MongoDB } from "./configs/database.config";
 import jwt from "@elysiajs/jwt";
 import { jwtConfig } from "./configs/jwt.config";
 import { AccountComtroller } from "./controllers/account.controller";
+import Database from "bun:sqlite";
+import { UserController } from "./controllers/user.controller";
 
 MongoDB.connect()
+// Database.()
 
 const app = new Elysia()
 .use(cors())
@@ -16,9 +19,10 @@ const app = new Elysia()
 .use(swaggerConfig)
 .use(jwtConfig)
 .use(AccountComtroller)
+.use(UserController)
 
 .listen({
-  port: Bun.env.PORT || 6666,
+  port: Bun.env.PORT || 8000,
   tls: tlsConfig
 })
 
