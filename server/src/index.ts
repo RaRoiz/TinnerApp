@@ -1,5 +1,4 @@
 import { Elysia, t} from "elysia";
-import { example } from "./controllers/example.controller";
 import { swaggerConfig } from "./configs/swagger.config";
 import { tlsConfig } from "./configs/tls.config";
 import {cors} from "@elysiajs/cors";
@@ -7,7 +6,6 @@ import { MongoDB } from "./configs/database.config";
 import jwt from "@elysiajs/jwt";
 import { jwtConfig } from "./configs/jwt.config";
 import { AccountComtroller } from "./controllers/account.controller";
-import Database from "bun:sqlite";
 import { UserController } from "./controllers/user.controller";
 
 MongoDB.connect()
