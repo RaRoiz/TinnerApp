@@ -1,7 +1,6 @@
 import mongoose, { RootFilterQuery } from "mongoose"
 import { updateProfile, user, userPagination, userPaginator } from "../types/user.type"
 import { IUserDocument } from "../interfaces/user.interface"
-import { $ } from "bun"
 import { QueryHelper } from "../helpers/query.helper"
 
 export const UserService = {

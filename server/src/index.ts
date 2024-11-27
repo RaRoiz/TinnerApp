@@ -11,15 +11,14 @@ import Database from "bun:sqlite";
 import { UserController } from "./controllers/user.controller";
 
 MongoDB.connect()
-// Database.()
 
 const app = new Elysia()
 .use(cors())
-// .use(example)
-.use(swaggerConfig)
 .use(jwtConfig)
+.use(swaggerConfig)
 .use(AccountComtroller)
 .use(UserController)
+// .use(example)
 
 .listen({
   port: Bun.env.PORT || 8000,
@@ -29,4 +28,4 @@ const app = new Elysia()
 let protocol = 'http'
 if ('cert' in tlsConfig)
 protocol = 'https'
-console.log(`🦊 Elysia is running at ${protocol}://${app.server?.hostname}:${app.server?.port}`);
+console.log(`Elysia is running at ${protocol}://${app.server?.hostname}:${app.server?.port}`)

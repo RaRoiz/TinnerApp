@@ -3,7 +3,7 @@ import { IUserDocument,IUserModel } from "../interfaces/user.interface"
 import { calculateAge } from "../helpers/date.helper"
 import { register} from "../types/account.type"
 import { user } from "../types/user.type"
-import { password } from "bun"
+
 const schema = new mongoose.Schema<IUserDocument, IUserModel>({
     username: { type: String, required: true, unique: true },
     password_hash: { type: String, required: true },

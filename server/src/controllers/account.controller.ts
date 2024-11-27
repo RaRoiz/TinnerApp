@@ -7,7 +7,7 @@ import { errorToResponse } from "elysia/dist/handler";
 import { User } from "../models/user.model";
 
 export const AccountComtroller = new Elysia({
-    prefix:'/api/v1/account',
+    prefix:'/api/account',
     tags:['Account']
 })
 .use(jwtConfig)

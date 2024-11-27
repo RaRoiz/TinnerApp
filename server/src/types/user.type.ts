@@ -1,8 +1,6 @@
 import Elysia, { t, Static } from "elysia"
 import { _register } from "./register.type"
 import { _pagination, CreatePagination } from "./pagination.type"
-import { User } from "../models/user.model"
-import { model } from "mongoose"
 
 
 export const _profile = t.Object({
@@ -25,11 +23,6 @@ export const _user = t.Object({
     //todo: implement like feature
     //follower: profile[]
     //fpllowing: profile[]
-})
-
-export const _userAndToken = t.Object({
-    user: _user,
-    token: t.String()
 })
 
 const _userPagination = t.Object({
