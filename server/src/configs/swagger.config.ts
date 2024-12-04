@@ -1,7 +1,7 @@
 import swagger  from "@elysiajs/swagger"
 
 export const swaggerConfig = swagger({
-    path: '/api-doc',
+    path: '/api-docs',
     documentation:{
         info: {
             title:"TinnerApp API",
