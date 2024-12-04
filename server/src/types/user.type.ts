@@ -1,6 +1,10 @@
 import Elysia, { t, Static } from "elysia"
 import { _register } from "./register.type"
 import { _pagination, CreatePagination } from "./pagination.type"
+import { IUserDocument } from "../interfaces/user.interface"
+import mongoose, { Query } from "mongoose"
+import { QueryHelper } from "../helpers/query.helper"
+import { User } from "../models/user.model"
 
 
 export const _profile = t.Object({
