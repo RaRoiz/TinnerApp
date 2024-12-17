@@ -3,6 +3,7 @@ import { IUserDocument,IUserModel } from "../interfaces/user.interface"
 import { calculateAge } from "../helpers/date.helper"
 import { register} from "../types/account.type"
 import { user } from "../types/user.type"
+import { Photo } from "./photo.model"
 
 const schema = new mongoose.Schema<IUserDocument, IUserModel>({
     username: { type: String, required: true, unique: true },
@@ -15,6 +16,7 @@ const schema = new mongoose.Schema<IUserDocument, IUserModel>({
     looking_for: { type: String },
     location: { type: String },
     gender:{type:String},
+    photos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Photo' }],
 
     // todo: implement photo feature
     // photos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Photo' }],
@@ -30,10 +32,9 @@ schema.methods.toUser = function (): user {
         ageString = `${calculateAge(this.date_of_birth)}`
 
 
-    // todo: implement like feature
-    // const userPhotos = Array.isArray(this.photos)
-    //     ? this.photos.map(photo => (new Photo(photo)).toPhoto())
-    //     : undefined
+    const userPhotos = Array.isArray(this.photos)
+        ? this.photos.map(photo => (new Photo(photo)).toPhoto())
+        : undefined
 
     // const parseLikeUser = (user: IUserDocument[]) => {
     //     return user.map(u => {

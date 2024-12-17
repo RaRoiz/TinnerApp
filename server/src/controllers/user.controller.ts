@@ -20,7 +20,7 @@ export const UserController = new Elysia({
 
      .get('/user' , ({query,Auth}) => {
         const user_id = (Auth.payload as AuthPayload).id
-        return UserService.get(query,user_id)
+        return UserService._get(query,user_id)
      }, {
         detail: {summary: "Get User"},
         query: "pagination",

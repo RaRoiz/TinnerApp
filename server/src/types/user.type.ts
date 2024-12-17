@@ -5,6 +5,7 @@ import { IUserDocument } from "../interfaces/user.interface"
 import mongoose, { Query } from "mongoose"
 import { QueryHelper } from "../helpers/query.helper"
 import { User } from "../models/user.model"
+import { _photo } from "./photo.type"
 
 
 export const _profile = t.Object({
@@ -17,9 +18,7 @@ export const _profile = t.Object({
     last_active: t.Optional(t.Date()),
     created_at: t.Optional(t.String()),
     updated_at: t.Optional(t.Date()),
-
-    //todo: implement update feature
-    //photo: phori_id[]
+    photos: t.Optional(t.Array(_photo),)
 })
 
 export const _user = t.Object({

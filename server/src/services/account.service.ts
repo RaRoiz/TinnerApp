@@ -4,8 +4,10 @@ import { user } from "../types/user.type";
 
 export const AccountService = {
     login:async function(loginData:login):Promise<user>{
-        const user = await User.findOne({username:loginData.username}).exec()
-        //TODO: implement like and photo
+        const user = await User.findOne({username:loginData.username})
+        .populate("photos")
+        .exec()
+        
 
         if(!user)
             throw new Error("User does not Real")

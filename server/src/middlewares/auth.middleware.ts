@@ -14,7 +14,6 @@ export const AuthMiddleware = new Elysia({name: 'Middleware.Auth'})
     .derive({ as: 'scoped' }, async ({ headers, jwt }): Promise<AuthContext> => {
         let payload: false | (Record<string, string | number> & JWTPayloadSpec) = false
 
-        //Extract the 'Authorization' header from the incoming request
         const auth = headers['authorization']
         const token = auth && auth.startsWith('Bearer ') ? auth.slice(7) : null
         if (token) {
@@ -28,7 +27,6 @@ export const AuthMiddleware = new Elysia({name: 'Middleware.Auth'})
         }
     })
     .macro(({ onBeforeHandle }) => ({
-        // This is declaring a service method
         isSignIn(value: boolean) {
             if (!value) return
             onBeforeHandle((context) => {

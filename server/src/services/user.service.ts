@@ -25,19 +25,19 @@ export const UserService = {
         items: docs.map(docs => docs.toUser()),
         }
     },
-    get get(){
-        return  this._get
-    },
-    set get(value){
-        this.get = value
-    },
-
-    // getByUserNamr: async function (username: string ):Promise<user>{
-    // const user =  await User.findOne({username}).exec()
-    // if (user)
-    //     return user.toUser()
-    //     throw new Error(`username:"${username}"not found!`)
+    // get get(){
+    //     return  this._get
     // },
+    // set get(value){
+    //     this.get = value
+    // },
+
+    getByUserNamr: async function (username: string ):Promise<user>{
+    const user =  await User.findOne({username}).exec()
+    if (user)
+        return user.toUser()
+        throw new Error(`username:"${username}"not found!`)
+    },
 
     updateProfile: async function (newProfile: updateProfile,user_id: string ):Promise<user> {
         const user =  await User.findByIdAndUpdate(user_id,{$set: newProfile},{new:true, runValidators:true})
