@@ -6,7 +6,6 @@ import { User } from "../models/user.model"
 import { photo } from "../types/photo.type"
 
 export const PhotoService = {
-    //todo: implement this
     upload: async function (file: File, user_id: string): Promise<photo> {
         const buffer = await file.arrayBuffer()
         const isFileValid = ImageHelper.isImage(buffer)
@@ -43,12 +42,25 @@ export const PhotoService = {
         return uploadPhoto.toPhoto()
     },
 
-    get: async function (user_id: string): Promise<photo[]> {
-        throw new Error('Not implemented yet')
+    getPhotos: async function (user_id: string): Promise<photo[]> {
+        const photoDocs = await Photo.find({user:user_id}).exec()
+        const photos = photoDocs.map( doc => doc.toPhoto())
+        return photos
     },
 
     delete: async function (photo_id: string): Promise<boolean> {
-        throw new Error('Not implemented yet')
+        const doc = await Photo.findById(photo_id).exec()
+        if (!doc)
+            throw new Error(`photo ${photo_id} not existing`);
+
+        await User.findByIdAndUpdate(doc.user,{
+            $pull: {photos: photo_id}
+        })
+        await Photo.findByIdAndDelete(photo_id)
+
+        await Cloudinary.uploader.destroy(doc.public_id)
+
+        return true;
     },
 
     setAvatar: async function (photo_id: string, user_id: string): Promise<boolean> {

@@ -15,7 +15,7 @@ export const AuthMiddleware = new Elysia({name: 'Middleware.Auth'})
         let payload: false | (Record<string, string | number> & JWTPayloadSpec) = false
 
         const auth = headers['authorization']
-        const token = auth && auth.startsWith('Bearer ') ? auth.slice(7) : null
+        const token = auth && auth.startsWith('Bearer') ? auth.slice(7) : null
         if (token) {
             payload = await jwt.verify(token)
             if (!payload) {
