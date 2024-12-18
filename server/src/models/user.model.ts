@@ -18,6 +18,7 @@ const schema = new mongoose.Schema<IUserDocument, IUserModel>({
     gender:{type:String},
 
     photos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Photo' }],
+
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 }, {
@@ -33,19 +34,19 @@ schema.methods.toUser = function (): user {
         ? this.photos.map(photo => (new Photo(photo)).toPhoto())
         : undefined
 
-    // const parseLikeUser = (user: IUserDocument[]) => {
-    //     return user.map(u => {
-    //         if (u.display_name)
-    //             return u.toUser()
-    //         return u._id!.toString()
-    //     })
-    // }
-    // const following = Array.isArray(this.following)
-    //     ? parseLikeUser(this.following)
-    //     : undefined
-    // const followers = Array.isArray(this.followers)
-    //     ? parseLikeUser(this.followers)
-    //     : undefined
+    const parseLikeUser = (user: IUserDocument[]) => {
+        return user.map(u => {
+            if (u.display_name)
+                return u.toUser()
+            return u._id!.toString()
+        })
+    }
+    const following = Array.isArray(this.following)
+        ? parseLikeUser(this.following)
+        : undefined
+    const followers = Array.isArray(this.followers)
+        ? parseLikeUser(this.followers)
+        : undefined
 
     return {
         id: this._id.toString(),
@@ -61,11 +62,11 @@ schema.methods.toUser = function (): user {
         looking_for: this.looking_for,
         location: this.location,
         gender: this.gender,
-        // todo: photo feature
-        // photos: userPhotos,
-        // todo: like feature
-        // following: following,
-        // followers: followers,
+
+        photos: userPhotos,
+
+        following: following,
+        followers: followers,
     }
 }
 

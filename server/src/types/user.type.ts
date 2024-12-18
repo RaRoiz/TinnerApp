@@ -1,10 +1,6 @@
 import Elysia, { t, Static } from "elysia"
 import { _register } from "./register.type"
 import { _pagination, CreatePagination } from "./pagination.type"
-import { IUserDocument } from "../interfaces/user.interface"
-import mongoose, { Query } from "mongoose"
-import { QueryHelper } from "../helpers/query.helper"
-import { User } from "../models/user.model"
 import { _photo } from "./photo.type"
 
 
@@ -43,7 +39,8 @@ export const UserDto = new Elysia().model({
     pagination: t.Optional(_userPagination),
     updateProfile: _updateProfile,
     users:_userPaginator,
-    user: _user
+    user: _user,
+    target_id: t.Object({target_id: t.String()})
 })
 
 
