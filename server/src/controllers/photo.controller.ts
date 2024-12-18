@@ -31,7 +31,7 @@ export const PhotoController = new Elysia({
         const user_id = (Auth.payload as AuthPayload).id
         return await PhotoService.getPhotos(user_id)
     },{
-        detail: {summary: "Get photo[ by user_id"},
+        detail: {summary: "Get photo[] by user_id"},
         isSignIn: true,
         response: "photos"
     })

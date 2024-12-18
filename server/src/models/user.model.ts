@@ -16,6 +16,7 @@ const schema = new mongoose.Schema<IUserDocument, IUserModel>({
     looking_for: { type: String },
     location: { type: String },
     gender:{type:String},
+    
     photos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Photo' }],
 
     // todo: implement photo feature
